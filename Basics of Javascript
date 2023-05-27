@@ -1,0 +1,101 @@
+// Factory Function
+function createrectangle(len,bre){
+    return rectangle={
+        length:len,
+        breadth:bre,
+        draw: function()
+        {
+            console.log('drawing rectangle');
+        }
+    };
+}
+let newrectangle=createrectangle(2,4);
+console.log(newrectangle);
+// Constructor Function
+function Rectangle(len, bre)
+{
+        this.length=len;
+        this.breadth=bre;
+        this.draw=function(){
+            console.log('drawing');
+        }
+    
+}
+let newrec= new Rectangle(1,3);
+console.log(newrec);
+//Dynamic nature of object
+let obj={
+   color:'red',
+};
+console.log(obj);
+obj.color='yellow';
+console.log(obj);
+delete obj.color;
+console.log(obj);
+// Primitive Vs Reference
+// Primitive
+let a=10;
+b=a;
+a++;
+console.log(a);
+console.log(b);
+// Reference
+let ref={
+   a:10,
+};
+let def=ref;
+ref.a++;
+console.log(ref);
+console.log(def);
+// Primitive are copied by the value while, refrences are copied by the address
+// Iterations through objects
+// for in loop is used for iteration through objects
+let ructangle={
+    len:2,
+    bre:4,
+};
+for(let key in ructangle)
+{
+    console.log(key,ructangle[key]);
+}
+// len and bre are the keys here 
+// ructangle[key] refers to value of the key 
+// for of loop is not used in objects because it is not iterable through loops
+// But it can be used in the folowing way
+for(let key of Object.entries(ructangle))
+{
+    console.log(key);
+}
+// IF we want to check if a particular property is present in object or not 
+if('len' in ructangle){
+    console.log('present');
+}
+else{
+    console.log('absent');
+}
+// Object Cloning
+// Object Cloning through iteration
+let src1={
+   value:10,
+};
+let des1={};
+for(let key in src1)
+{
+    des1[key]=src1[key];
+}
+src1.value++;
+console.log(des1.value);
+// Object cloning through assign 
+let src2={
+    value:10,
+};
+let des2=Object.assign({},src2);
+src2.value++;
+console.log(des2.value);
+// Object Cloning through spread operator
+let src3={ 
+    value:10,
+};
+let des3={...src3};
+src3.value++;
+console.log(des3.value);
