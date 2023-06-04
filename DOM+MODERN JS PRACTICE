@@ -1,0 +1,182 @@
+// Fetching elements from webapge
+//get Element by ID,it will return single element as id is unique
+let a=document.getElementById('Ramesh');
+console.log(a);
+// get elements by class name, it will return collection of array like objects
+let b=document.getElementsByClassName('Hero');
+console.log(b);
+// get elements by tagname, it will also return list
+let c=document.getElementsByTagName('h1');
+console.log(c);
+// $0 to fetch any element 
+//Query Selector
+let d=document.querySelector('#Ramesh');
+let e=document.querySelector('.Hero');
+let f=document.querySelector('h2');
+console.log(d);
+console.log(e);
+console.log(f);
+// Query Selector ALL
+let g=document.querySelectorAll('.Hero');
+console.log(g);
+// Update existing content
+// InnerHTML
+let h=document.querySelector('.third');
+console.log(h.innerHTML);
+// Set Html
+// h.innerHTML=' ';
+console.log(h);
+// text content gives text in your html hidden element will also show
+console.log(h.textContent);
+// Inner Text -same as text content but hidden things will not show
+console.log(h.innerText);
+// Adding new element, p tag will be added at last
+let content=document.querySelector('.header');
+let newele=document.createElement('p');
+content.appendChild(newele);
+console.log(content);
+// Adding a text node
+let newpara=document.createElement('h2');
+newpara.textContent='H2 added';
+content.appendChild(newpara);
+console.log(content);
+// Inserting Html at adjacent position
+let con=document.querySelector('.c2');
+console.log(con);
+let ne=document.createElement('p');
+ne.textContent='I love you';
+con.insertAdjacentElement('beforebegin',ne);
+console.log(con);
+// Removing element
+ne.parentNode.removeChild(ne);
+// Making changes in CSS using js
+// Using .style
+let k=document.querySelector('.style');
+k.style.color='red';
+//.style.cssText by using this we can make multiple changes in css
+k.style.cssText='color:green; background-color:yellow; font-Size:4em'
+// Set attribute is also used to make multiple changes in css using js
+k.setAttribute("style","color:blue","background-color:red");
+// with the help of classname we get string of all the classnames
+// we can store it any variable in the form of array with help of split()
+console.log(k.className);
+console.log(typeof k.className);
+let classNames=k.className.trim().split(' ');
+console.log(classNames);
+// Best way to get classname is classlist array of objects
+console.log(k.classList);
+console.log(typeof k.classList);
+// To add class using classlist we use .add 
+k.classList.add('mc');
+console.log(k.classList);
+// To remove class using classlist we use .remove
+k.classList.remove('style');
+console.log(k.classList);
+//To check whether a class is present or not we use .contains()
+// It will return boolean value
+console.log(k.classList.contains('mc'));
+//
+console.log(k.classList.toggle);
+// document me event lsitener add krna
+document.addEventListener('click',function ()
+{
+    console.log('Kyun faltu click kr rha h');
+})
+// Adding evntlistener to an element
+let lu=document.querySelector('.a');
+lu.addEventListener('click',function (){
+    k.style.color='green';
+})
+// We can write function outside also
+let z=document.querySelector('.event');
+function parasta()
+{
+    z.style.color='red';
+}
+z.addEventListener('click',parasta);
+// TO remove event listener
+z.removeEventListener('click',parasta);
+// IT is an event object which gives details of all the events happening
+z.addEventListener('click',function (event)
+{
+    console.log(event);
+}
+);
+// For preventing default action
+let x=document.querySelectorAll('a');
+thirdlink=x[2];
+thirdlink.addEventListener('click',function (event)
+{
+   event.preventdefault();
+   console.log('maza aaya');
+});
+// Adding 100 para in a div
+const t1=performance.now();
+let div=document.createElement('div');
+for(let i=0;i<=100;i++)
+{
+    let w=document.createElement('p');
+    w.textContent='This is para'+i;
+    w.addEventListener('click',function(event){
+        console.log('I have clicked on para'+i);
+    });
+    div.appendChild(w);
+}
+document.body.appendChild(div);
+const t2=performance.now();
+console.log('Time taken1='+(t2-t1));
+
+
+// Another optimize method
+// let mydiv=document.createElement('div');
+// function parastatus(event)
+// {
+//     console.log('I have clicked on this event');
+// }
+// mydiv.addEventListener('click',parastatus);
+// for(let i=0;i<=100;i++)
+// {
+//     let newelement=document.createElement('p');
+//     newelement.textContent=' I have click on para'+i;
+//     mydiv.appendChild(newelement);
+// }
+// document.body.appendChild(mydiv);
+
+
+
+
+//As you can see we lose the individuality of each para
+// to maintain it we use event.target.textcontent
+const t3=performance.now();
+let mydiv=document.createElement('div');
+function parastatus(event)
+{
+    console.log('I have clicked on this event'+event.target.textContent);
+}
+mydiv.addEventListener('click',parastatus);
+for(let i=0;i<=100;i++)
+{
+    let newelement=document.createElement('p');
+    newelement.textContent=' I have click on para'+i;
+    mydiv.appendChild(newelement);
+}
+document.body.appendChild(mydiv);
+const t4=performance.now();
+console.log('Time Taken2='+(t4-t2));
+// here we used performance.now to check the speed
+// document fragemnt to avoid multiple reflow and repaint
+let t5=performance.now();
+let fragemnt=document.createDocumentFragment();
+function lulu (event){
+    console.log('I have clicked on this event'+event.target.textContent);
+}
+fragemnt.addEventListener('click',lulu);
+for(let i=0;i<=100;i++)
+{
+   let newelement=document.createElement('p');
+    newelement.textContent='Lele click kiya'+i;
+    fragemnt.appendChild(newelement);
+}
+document.body.appendChild(fragemnt);
+let t6=performance.now();
+console.log('Time taken3='+(t6-t5));
