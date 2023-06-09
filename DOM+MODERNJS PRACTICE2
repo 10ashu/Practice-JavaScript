@@ -1,0 +1,73 @@
+// // Promises
+// // let merapromise=new Promise(function(resolve,reject)
+// // {
+// //     console.log('I am inside Promise');
+// //   resolve(1998);
+
+// // }
+// // )
+// // console.log('pehla');
+// // console.log(merapromise);
+// // for example
+// // Use then(gives value) and catch(throws error) 
+// let merapromise1=new Promise(function(resolve,reject)
+// {
+//     setTimeout(
+//         function()
+//         {
+//             console.log('I am inside mera promise 1');
+//         },5000);
+//      //  resolve(122);
+//      reject(new Error('Bhai sahab error aayen '));
+// }
+// )
+// // console.log('pehla');
+// // console.log(merapromise1);
+// // then is not working beacuse you have passed reject
+// merapromise1.then(value=>console.log(value));
+// merapromise1.catch(error=>console.log('Bhai sahab error aayen hnn'));
+// promise chaining
+// let newp= new Promise(function(resolve,reject)
+// {
+//     setTimeout(function(){
+//         console.log('Set Timeout 1 has started');  // It is an async code so it  will be resolved at last
+//     },5000);
+//     resolve(true);
+// }
+// ).then(()=>
+// {
+//     let wada2=new Promise(function(resolve,reject)
+//     {
+//         resolve('Waadaa 2 has been resolved');
+//     })
+//     return wada2;
+// }
+// ).then(value=>console.log(value)); // This is an synchronous code so it will execute first
+
+// Async Function it is used to run asynchronous code 
+// It always returns promise
+async function abcd()
+{
+    return 'kya hua tera wada';
+} 
+let val=abcd();
+console.log(val);
+// await is used to handle the completion of a particular promise, firstly taht promise should complete then the new line of code(promise) should execute
+async function utility()
+{
+    let delhimausam=new Promise(function(resolve,reject)
+    {
+     setTimeout(function(){
+        resolve('Delhi k mausam is cool');
+     },5000);   
+    })
+    let hydrabadmausam= new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve('Hydrabad me bhot garmi hai');
+        },6000);
+    })
+    let dm= await delhimausam;
+    let hm= await hydrabadmausam;
+    return (dm,hm);
+}
+console.log(utility());
